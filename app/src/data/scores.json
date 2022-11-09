@@ -1,0 +1,20 @@
+{
+    "player": "chris-obrien",
+    "playerId": "chris-obrien",
+    "scores": {
+        {   "round": 1,
+            "score": 36,
+            "date": "2019-01-01",
+            "slopeRating": 113,
+            "courseRating": 69.1,
+            "course": "Thurlestone"
+        },
+        {   "round": 2,
+            "score": 38,
+            "date": "2019-01-02",
+            "slopeRating": 115,
+            "courseRating": 69.1,
+            "course": "Thurlestone"
+        }
+    }
+}
