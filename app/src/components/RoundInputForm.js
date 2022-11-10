@@ -1,7 +1,7 @@
 import {useState, useRef} from 'react';
 
 
-const RoundInputForm = ({rounds, setRounds, players, setPlayers, player, setPlayer}) => {
+const RoundInputForm = ({rounds, setRounds, player}) => {
 
     
     const newRoundInput = useRef();

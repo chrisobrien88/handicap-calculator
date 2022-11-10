@@ -181,18 +181,19 @@ useEffect(() => {
           <input required type="text" placeholder="Enter your first name" ref={playerName}/>
           <button type="submit">Submit</button>
       </form>
-      {player? <h5>Player: {player.playerName}</h5> : null}
-      <div>
-        <RoundsList rounds={rounds} scores={scores}/>
-      </div>
-        <RoundInputForm 
-          rounds={rounds} 
-          setRounds={setRounds} 
-          players={players} 
-          setPlayers={setPlayers} 
-          player={player} 
-          setPlayer={setPlayer}
-          storedPlayers={storedPlayers}/> 
+      
+      {player? 
+        <section className='player-info-container'>
+          <h5>Player: {player.playerName}</h5>
+          <RoundInputForm 
+            rounds={rounds} 
+            setRounds={setRounds} 
+            player={player} />
+          <div>
+            <RoundsList rounds={rounds} scores={scores}/>
+          </div>
+        </section>  : null}
+      
     </div>
   );
 

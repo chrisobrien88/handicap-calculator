@@ -39,7 +39,7 @@ const RoundsList = ({rounds, scores}) => {
             <section className='rounds-list-container'>
             {rounds.map((round, index) => {
                 return (
-                    <RoundCard key={round.id} score={round.score} course={round.course} date={round.date}/>
+                    <RoundCard key={round.id} score={round.score} course={round.course} date={round.date} />
                 )
             })}
             </section>
