@@ -1,7 +1,7 @@
 import {useState, useRef} from 'react';
 
 
-const RoundInputForm = ({rounds, setRounds}) => {
+const RoundInputForm = ({rounds, setRounds, players, setPlayers, player, setPlayer}) => {
 
     
     const newRoundInput = useRef();
@@ -9,15 +9,18 @@ const RoundInputForm = ({rounds, setRounds}) => {
     const addNewRound = (e) => {
         e.preventDefault();
       const newRound = {
+        id: Date.now(),
         round: rounds.length + 1,
         date: new Date().toISOString().slice(0, 10),
         slopeRating: 113,
         courseRating: 69.1,
-        name: 'playerName.current.value',
+        name: player.playerName,
+        playerId: player.playerId,
         score: Number(newRoundInput.current.value),
       }
       // update scores state
       setRounds([...rounds, newRound]);
+      console.log(rounds.length);
       newRoundInput.current.value = '';
     }
 

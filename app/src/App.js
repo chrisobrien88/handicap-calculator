@@ -11,54 +11,135 @@ const storedPlayers = localStorage.getItem('storedPlayers') || [
     "playerName": "chris",
     "playerId": "chris-obrien",
     "rounds": [
-        {   "round": 1,
-            "score": 36,
-            "date": "2019-01-01",
+        {   "id": 1,
+            "score": 40,
+            "date": "2018-05-06",
             "slopeRating": 113,
             "courseRating": 69.1,
             "course": "Thurlestone"
         },
-        {   "round": 2,
+        {   "id": 2,
             "score": 38,
             "date": "2019-01-02",
+            "slopeRating": 115,
+            "courseRating": 69.1,
+            "course": "The Berkshire"
+        },
+        {   "id": 3,
+            "score": 42,
+            "date": "2020-01-02",
             "slopeRating": 115,
             "courseRating": 69.1,
             "course": "Thurlestone"
         },
-        {   "round": 3,
-            "score": 38,
-            "date": "2019-01-02",
+        {   "id": 4,
+            "score": 29,
+            "date": "2020-01-02",
             "slopeRating": 115,
             "courseRating": 69.1,
             "course": "Thurlestone"
-        }
+        },
+        {   "id": 5,
+            "score": 38,
+            "date": "2020-01-02",
+            "slopeRating": 115,
+            "courseRating": 69.1,
+            "course": "Thurlestone"
+        },
+        {   "id": 6,
+            "score": 37,
+            "date": "2020-01-02",
+            "slopeRating": 115,
+            "courseRating": 69.1,
+            "course": "Thurlestone"
+        },
       ]
   },
   {
     "playerName": "ben",
     "playerId": "ben-macandrews",
     "rounds": [
-        {   "round": 1,
-            "score": 46,
+        {   "id": 1,
+            "score": [
+              {"eagles": 0},
+              {"birdies": 0},
+              {"pars": 0},
+              {"bogeys": 0},
+              {"doubleBogeys": 0},
+              {"tripleBogeys": 0},
+              {"quadrupleBogeys": 0},
+              {"pickUps": 0}
+            ],
             "date": "2019-01-01",
-            "slopeRating": 113,
+            "slopeRating": 130,
             "courseRating": 69.1,
-            "course": "Thurlestone"
+            "course": "Amendoeira - Faldo Course"
         },
-        {   "round": 2,
-            "score": 42,
+        {   "id": 2,
+            "score": [
+              {"eagles": 0},
+              {"birdies": 0},
+              {"pars": 0},
+              {"bogeys": 0},
+              {"doubleBogeys": 0},
+              {"tripleBogeys": 0},
+              {"quadrupleBogeys": 0},
+              {"pickUps": 0}
+            ],
             "date": "2019-01-02",
-            "slopeRating": 115,
+            "slopeRating": 125,
             "courseRating": 69.1,
-            "course": "Thurlestone"
+            "course": "Richmond"
+        },
+        {   "id": 3,
+            "score": [
+              {"eagles": 0},
+              {"birdies": 0},
+              {"pars": 0},
+              {"bogeys": 0},
+              {"doubleBogeys": 0},
+              {"tripleBogeys": 0},
+              {"quadrupleBogeys": 0},
+              {"pickUps": 0}
+            ],
+            "date": "2019-01-02",
+            "slopeRating": 130,
+            "courseRating": 69.1,
+            "course": "Richmond"
+        }
+      ]
+  },
+  {
+    "playerName": "josh",
+    "playerId": "josh-lee",
+    "rounds": [
+        {   "id": 1,
+            "score": 24,
+            "date": "2019-01-01",
+            "slopeRating": 130,
+            "courseRating": 69.1,
+            "course": "Amendoeira - Faldo Course"
+        },
+        {   "id": 2,
+            "score": 16,
+            "date": "2019-01-02",
+            "slopeRating": 125,
+            "courseRating": 69.1,
+            "course": "Richmond"
+        },
+        {   "id": 3,
+            "score": 21,
+            "date": "2019-01-02",
+            "slopeRating": 130,
+            "courseRating": 69.1,
+            "course": "Richmond"
         }
       ]
   }
 ];
 
-const [player, setPlayer] = useState('');
 const [players, setPlayers] = useState(storedPlayers);
-const [handicap, setHandicap] = useState('');
+const [player, setPlayer] = useState('');
 const [rounds, setRounds] = useState([]);
 const [scores, setScores] = useState([]);
 
@@ -81,7 +162,6 @@ useEffect(() => {
         scores.push(round.score);
     }) 
     }
-    console.log(scores);
     setScores(scores);
 
     const rounds = [];
@@ -93,9 +173,6 @@ useEffect(() => {
   
 }, [player])
 
-
-
-
   return (
     <div>
       <h1>Calculate your handicap</h1>
@@ -104,13 +181,21 @@ useEffect(() => {
           <input required type="text" placeholder="Enter your first name" ref={playerName}/>
           <button type="submit">Submit</button>
       </form>
-      <h3>{player.playerName}</h3>
+      {player? <h5>Player: {player.playerName}</h5> : null}
       <div>
         <RoundsList rounds={rounds} scores={scores}/>
       </div>
-        <RoundInputForm rounds={rounds} setRounds={setRounds}/> 
+        <RoundInputForm 
+          rounds={rounds} 
+          setRounds={setRounds} 
+          players={players} 
+          setPlayers={setPlayers} 
+          player={player} 
+          setPlayer={setPlayer}
+          storedPlayers={storedPlayers}/> 
     </div>
   );
+
 }
 
 export default App;
