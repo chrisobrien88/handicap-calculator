@@ -56,7 +56,7 @@ const storedPlayers = localStorage.getItem('storedPlayers') || [
       ]
   },
   {
-    "playerName": "ben",
+    "playerName": "other",
     "playerId": "ben-macandrews",
     "rounds": [
         {   "id": 1,
@@ -141,28 +141,24 @@ const storedPlayers = localStorage.getItem('storedPlayers') || [
 const [players, setPlayers] = useState(storedPlayers);
 const [player, setPlayer] = useState('');
 const [rounds, setRounds] = useState([]);
-const [scores, setScores] = useState([]);
 
 const playerName = useRef();
 
 const findPlayer = (e) => {
   e.preventDefault();
   storedPlayers.find(player => {
-      if (player.playerName === playerName.current.value) {
+      if (player.playerName === playerName.current.value.toLowerCase()) {
           setPlayer(player);
       }
   })
   playerName.current.value = '';
 }
 
+const clearPlayer = () => {
+  setPlayer('');
+}
+
 useEffect(() => {
-  
-    const scores = [];
-    if (player) { player.rounds.map(round => {
-        scores.push(round.score);
-    }) 
-    }
-    setScores(scores);
 
     const rounds = [];
     if (player) { player.rounds.map(round => {
@@ -178,19 +174,30 @@ useEffect(() => {
       <h1>Calculate your handicap</h1>
 
       <form onSubmit={e => findPlayer(e)}>
-          <input required type="text" placeholder="Enter your first name" ref={playerName}/>
-          <button type="submit">Submit</button>
+          {player? 
+            <div>
+            <button onClick={clearPlayer}>Change Player</button>
+            <h5>Player: {player.playerName}</h5>
+            </div> : 
+            <div>
+              <input required type="text" placeholder="Enter your first name" ref={playerName}/>
+              <button type="submit">Submit</button>
+            </div>
+          }
+          
       </form>
       
       {player? 
         <section className='player-info-container'>
-          <h5>Player: {player.playerName}</h5>
-          <RoundInputForm 
-            rounds={rounds} 
-            setRounds={setRounds} 
-            player={player} />
           <div>
-            <RoundsList rounds={rounds} scores={scores}/>
+            <RoundInputForm 
+              rounds={rounds} 
+              setRounds={setRounds} 
+              player={player} />
+            <RoundsList 
+              rounds={rounds} 
+              setRounds={setRounds} 
+              player={player} />
           </div>
         </section>  : null}
       
