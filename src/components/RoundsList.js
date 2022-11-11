@@ -29,17 +29,22 @@ const RoundsList = ({rounds, scores}) => {
 
     return (
         <section>
-            <article>
+            <article className='list-container'>
                 <h5>Total Rounds: {rounds.length}</h5>
-                {/* <h5>Rounds counted for handicap (top 40%) {rounds.length * 0.4.toFixed(0)}</h5> */}
                 <h5>Average of your best rounds: {bestScoresAverage}</h5>
                 <h5>Average of all Scores: {averageScores} </h5>
                 <h5>Handicap Index: {handicap}</h5>
             </article>
-            <section className='rounds-list-container'>
+            <section className='list-container'>
             {rounds.map((round, index) => {
+                console.log(round);
                 return (
-                    <RoundCard key={round.id} score={round.score} course={round.course} date={round.date} />
+                    <RoundCard key={round.id}
+                        score={round.score}
+                        course={round.course}
+                        date={round.date}
+                        slopeRating={round.slopeRating}
+                        courseRating={round.courseRating}/>
                 )
             })}
             </section>
