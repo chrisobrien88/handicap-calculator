@@ -27,8 +27,8 @@ const RoundInputForm = ({rounds, setRounds, player}) => {
     return (
         <div>
             <form onSubmit={e => addNewRound(e)}>
-                <input type="text" placeholder="Enter your score" ref={newRoundInput}/>
-                <button type="submit">Submit</button>
+                <input required type="text" placeholder="Enter score e.g. 36" ref={newRoundInput}/>
+                <button class = 'button' type="submit" >Submit</button>
             </form>
         </div>
     );

@@ -2,7 +2,7 @@ import RoundCard from './RoundCard';
 import {useState, useRef, useEffect} from 'react';
 
 
-const RoundsList = ({rounds, scores}) => {
+const RoundsList = ({rounds}) => {
     const [averageScores, setAverageScores] = useState('initial state');
     const [bestScoresAverage, setBestScoresAverage] = useState('initial state');
     const [handicap, setHandicap] = useState('initial state');
@@ -29,14 +29,15 @@ const RoundsList = ({rounds, scores}) => {
 
     return (
         <section>
-            <article className='list-container'>
-                <h5>Total Rounds: {rounds.length}</h5>
-                <h5>Average of your best rounds: {bestScoresAverage}</h5>
-                <h5>Average of all Scores: {averageScores} </h5>
-                <h5>Handicap Index: {handicap}</h5>
+            <article className='card stats'>
+                <p>Handicap Index: <p className='stats-text handicap'>{handicap}</p></p>
+                <p>Total Rounds: <p className='stats-text'>{rounds.length}</p></p>
+                <p>Average of your best rounds: <p className='stats-text'>{bestScoresAverage}</p></p>
+                <p>Average of all Scores: <h5>{averageScores}</h5></p>
             </article>
             <section className='list-container'>
-            {rounds.map((round, index) => {
+            {rounds.sort((a, b) => b.id - a.id)
+            .map((round, index) => {
                 console.log(round);
                 return (
                     <RoundCard key={round.id}
